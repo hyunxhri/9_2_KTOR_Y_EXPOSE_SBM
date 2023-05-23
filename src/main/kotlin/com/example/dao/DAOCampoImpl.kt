@@ -14,7 +14,8 @@ class DAOCampoImpl : DAOCampo {
         name = row[Campos.name],
         description = row[Campos.description],
         seasonId = row[Campos.seasonId],
-        order = row[Campos.order]
+        order = row[Campos.order],
+        sectionId = row[Campos.sectionId]
     )
     override suspend fun allCampos(): List<Campo> = dbQuery {
         Campos.selectAll().map(::resultRowToCampo)
@@ -32,7 +33,8 @@ class DAOCampoImpl : DAOCampo {
         name: String,
         description: String,
         seasonId: String,
-        order: Int
+        order: Int,
+        sectionId : Int
     ): Campo? = dbQuery {
         val insertStatement = Campos.insert {
             it[Campos.value] = value
@@ -40,6 +42,7 @@ class DAOCampoImpl : DAOCampo {
             it[Campos.description] = description
             it[Campos.seasonId] = seasonId
             it[Campos.order] = order
+            it[Campos.sectionId] = sectionId
         }
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToCampo)
     }
@@ -50,7 +53,8 @@ class DAOCampoImpl : DAOCampo {
         name: String,
         description: String,
         seasonId: String,
-        order: Int
+        order: Int,
+        sectionId: Int
     ): Boolean = dbQuery {
         Campos.update({ Campos.id eq id }) {
             it[Campos.value] = value
@@ -58,6 +62,7 @@ class DAOCampoImpl : DAOCampo {
             it[Campos.description] = description
             it[Campos.seasonId] = seasonId
             it[Campos.order] = order
+            it[Campos.sectionId] = sectionId
         } > 0
     }
 
@@ -68,7 +73,7 @@ class DAOCampoImpl : DAOCampo {
 val daoCampo: DAOCampo = DAOCampoImpl().apply {
     runBlocking {
         if(allCampos().isEmpty()) {
-            addNewCampo("YEPA", "Ya estoy", "por aquí no podía dejar mi", "stream", 33)
+            addNewCampo("YEPA", "Ya estoy", "por aquí no podía dejar mi", "stream", 33, 1)
         }
     }
 }

@@ -62,7 +62,7 @@ fun Application.configureRouting() {
             }
 
             get("new") {
-                call.respond(FreeMarkerContent("newCampo.ftl", model = null))
+                call.respond(FreeMarkerContent("newCampo.ftl", mapOf("articles" to dao.allArticles())))
             }
             post {
                 val formParameters = call.receiveParameters()
@@ -71,7 +71,8 @@ fun Application.configureRouting() {
                 val description = formParameters.getOrFail("description")
                 val seasonId = formParameters.getOrFail("seasonId")
                 val order = formParameters.getOrFail<Int>("order").toInt()
-                val campo = daoCampo.addNewCampo(value, name, description, seasonId, order)
+                val sectionId = formParameters.getOrFail<Int>("sectionId").toInt()
+                val campo = daoCampo.addNewCampo(value, name, description, seasonId, order, sectionId)
                 call.respondRedirect("/campos/${campo?.id}")
             }
 
@@ -81,7 +82,7 @@ fun Application.configureRouting() {
             }
             get("{id}/edit") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
-                call.respond(FreeMarkerContent("editCampo.ftl", mapOf("campo" to daoCampo.campo(id))))
+                call.respond(FreeMarkerContent("editCampo.ftl", mapOf("campo" to daoCampo.campo(id), "articles" to dao.allArticles())))
             }
             post("{id}") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
@@ -92,8 +93,9 @@ fun Application.configureRouting() {
                         val name = formParameters.getOrFail("name")
                         val description = formParameters.getOrFail("description")
                         val seasonId = formParameters.getOrFail("seasonId")
-                        val order = formParameters.getOrFail<Int>("order").toInt()
-                        daoCampo.editCampo(id, value, name, description, seasonId, order)
+                        val order = formParameters.getOrFail("order").toInt()
+                        val sectionId = formParameters.getOrFail("sectionId").toInt()
+                        daoCampo.editCampo(id, value, name, description, seasonId, order, sectionId)
                         call.respondRedirect("/campos/$id")
                     }
                     "delete" -> {

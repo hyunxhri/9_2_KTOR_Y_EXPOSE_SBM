@@ -1,3 +1,4 @@
+<#-- @ftlvariable name="articles" type="kotlin.collections.List<com.example.models.Article>" -->
 <#import "_layout.ftl" as layout />
 <@layout.header>
     <div>
@@ -22,6 +23,14 @@
             <p>
                 <label for="description">Description:</label>
                 <textarea name="description"></textarea>
+            </p>
+            <p>
+                <label for="sectionId">Section Id:</label>
+                <select name="sectionId">
+                    <#list articles?reverse as article>
+                        <option name="sectionOption" value="${article.id}">${article.id}</option>
+                    </#list>
+                </select>
             </p>
             <p>
                 <input type="submit">

@@ -1,9 +1,10 @@
 package com.example.models
 
 import com.example.models.Articles.autoIncrement
+import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.Table
 
-data class Campo(val id: Int, val value: String, val name: String, val description: String, val seasonId: String, val order: Int)
+data class Campo(val id: Int, val value: String, val name: String, val description: String, val seasonId: String, val order: Int, val sectionId : Int)
 
 object Campos : Table(){
     val id = integer("id").autoIncrement()
@@ -12,6 +13,6 @@ object Campos : Table(){
     val description = varchar("description", 256)
     val seasonId = varchar("seasonid", 32)
     val order = integer("orden")
-
+    val sectionId = integer("sectionid").references(Articles.id, onDelete= ReferenceOption.CASCADE)
     override val primaryKey = PrimaryKey(id)
 }
