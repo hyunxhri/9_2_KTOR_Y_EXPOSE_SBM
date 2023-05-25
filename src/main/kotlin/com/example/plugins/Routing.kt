@@ -1,7 +1,7 @@
 package com.example.plugins
 
-import com.example.dao.daoCampo
 import com.example.dao.dao
+import com.example.dao.daoCampo
 import com.example.models.*
 import io.ktor.server.application.*
 import io.ktor.server.freemarker.*
@@ -33,7 +33,7 @@ fun Application.configureRouting() {
             }
             get("{id}") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
-                call.respond(FreeMarkerContent("showArticle.ftl", mapOf("article" to dao.article(id))))
+                call.respond(FreeMarkerContent("showArticle.ftl", mapOf("article" to dao.article(id), "campos" to daoCampo.camposPorArticleId(id))))
             }
             get("{id}/edit") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()

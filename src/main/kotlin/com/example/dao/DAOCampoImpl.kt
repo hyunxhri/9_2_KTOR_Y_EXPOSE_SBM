@@ -15,7 +15,7 @@ class DAOCampoImpl : DAOCampo {
         description = row[Campos.description],
         seasonId = row[Campos.seasonId],
         order = row[Campos.order],
-        sectionId = row[Campos.sectionId]
+        sectionId = row[Campos.sectionId],
     )
     override suspend fun allCampos(): List<Campo> = dbQuery {
         Campos.selectAll().map(::resultRowToCampo)
@@ -28,13 +28,19 @@ class DAOCampoImpl : DAOCampo {
             .singleOrNull()
     }
 
+    override suspend fun camposPorArticleId(id: Int): List<Campo> = dbQuery {
+        Campos
+            .select { Campos.sectionId eq id }
+            .map(::resultRowToCampo)
+    }
+
     override suspend fun addNewCampo(
         value: String,
         name: String,
         description: String,
         seasonId: String,
         order: Int,
-        sectionId : Int
+        sectionId: Int,
     ): Campo? = dbQuery {
         val insertStatement = Campos.insert {
             it[Campos.value] = value
@@ -54,7 +60,7 @@ class DAOCampoImpl : DAOCampo {
         description: String,
         seasonId: String,
         order: Int,
-        sectionId: Int
+        sectionId: Int,
     ): Boolean = dbQuery {
         Campos.update({ Campos.id eq id }) {
             it[Campos.value] = value
@@ -72,7 +78,7 @@ class DAOCampoImpl : DAOCampo {
 }
 val daoCampo: DAOCampo = DAOCampoImpl().apply {
     runBlocking {
-        if(allCampos().isEmpty()) {
+        if (allCampos().isEmpty()) {
             addNewCampo("YEPA", "Ya estoy", "por aquí no podía dejar mi", "stream", 33, 1)
         }
     }
