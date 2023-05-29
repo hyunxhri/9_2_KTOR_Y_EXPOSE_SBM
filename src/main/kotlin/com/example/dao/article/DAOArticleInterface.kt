@@ -1,7 +1,7 @@
-package com.example.dao
-import com.example.models.*
+package com.example.dao.article
+import com.example.models.article.Article
 
-interface DAOArticle {
+interface DAOArticleInterface {
     suspend fun allArticles(): List<Article>
     suspend fun article(id: Int): Article?
     suspend fun addNewArticle(title: String, body: String): Article?

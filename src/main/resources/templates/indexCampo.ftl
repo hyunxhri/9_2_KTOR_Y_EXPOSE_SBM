@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="campos" type="kotlin.collections.List<com.example.models.Campo>"-->
+<#-- @ftlvariable name="campos" type="kotlin.collections.List<com.example.models.campo.Campo>"-->
 <#import "_layout.ftl" as layout />
 <@layout.header>
     <#list campos?reverse as campo>

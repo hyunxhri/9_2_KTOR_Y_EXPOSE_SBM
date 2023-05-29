@@ -1,6 +1,7 @@
 package com.example.dao
 
-import com.example.models.*
+import com.example.models.article.Articles
+import com.example.models.campo.Campos
 import kotlinx.coroutines.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.*

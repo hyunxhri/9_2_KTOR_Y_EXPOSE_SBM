@@ -1,11 +1,9 @@
 package com.example.plugins
 
-import com.example.dao.dao
-import com.example.dao.daoCampo
-import com.example.models.*
+import com.example.dao.article.dao
+import com.example.dao.campo.daoCampo
 import io.ktor.server.application.*
 import io.ktor.server.freemarker.*
-import io.ktor.server.http.content.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*

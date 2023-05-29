@@ -1,13 +1,12 @@
-package com.example.dao
+package com.example.dao.campo
 
 import com.example.dao.DatabaseFactory.dbQuery
-import com.example.models.Campo
-import com.example.models.Campos
-import kotlinx.coroutines.runBlocking
+import com.example.models.campo.Campo
+import com.example.models.campo.Campos
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
-class DAOCampoImpl : DAOCampo {
+class DAOCampoImpl : DAOCampoInterface {
     private fun resultRowToCampo(row: ResultRow) = Campo(
         id = row[Campos.id],
         value = row[Campos.value],
@@ -76,10 +75,4 @@ class DAOCampoImpl : DAOCampo {
         Campos.deleteWhere { Campos.id eq id } > 0
     }
 }
-val daoCampo: DAOCampo = DAOCampoImpl().apply {
-    runBlocking {
-        if (allCampos().isEmpty()) {
-            addNewCampo("YEPA", "Ya estoy", "por aquí no podía dejar mi", "stream", 33, 1)
-        }
-    }
-}
+

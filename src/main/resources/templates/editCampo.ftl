@@ -1,5 +1,5 @@
-<#-- @ftlvariable name="campo" type="com.example.models.Campo" -->
-<#-- @ftlvariable name="articles" type="kotlin.collections.List<com.example.models.Article>" -->
+<#-- @ftlvariable name="campo" type="com.example.models.campo.Campo" -->
+<#-- @ftlvariable name="articles" type="kotlin.collections.List<com.example.models.article.Article>" -->
 <#import "_layout.ftl" as layout />
 <@layout.header>
     <div>
@@ -33,7 +33,7 @@
         </form>
     </div>
     <div>
-        <form action="/campos/${campo.id}" method="post">
+        <form action="/campos/${campo.id}" method="post" onsubmit="return confirmButton();">
             <p>
                 <input type="submit" name="_action" value="delete">
             </p>

@@ -1,8 +1,8 @@
-package com.example.dao
+package com.example.dao.campo
 
-import com.example.models.*
+import com.example.models.campo.Campo
 
-interface DAOCampo {
+interface DAOCampoInterface {
     suspend fun allCampos(): List<Campo>
     suspend fun campo(id: Int): Campo?
     suspend fun camposPorArticleId(id: Int): List<Campo>

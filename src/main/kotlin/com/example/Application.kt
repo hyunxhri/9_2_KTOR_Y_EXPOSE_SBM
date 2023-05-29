@@ -1,6 +1,5 @@
 package com.example
 import com.example.dao.*
-
 import com.example.plugins.* // ktlint-disable no-wildcard-imports
 import io.ktor.server.application.*
 

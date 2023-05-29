@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="campo" type="com.example.models.Campo" -->
+<#-- @ftlvariable name="campo" type="com.example.models.campo.Campo" -->
 <#import "_layout.ftl" as layout />
 <@layout.header>
     <div>

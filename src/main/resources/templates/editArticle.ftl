@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="article" type="com.example.models.Article" -->
+<#-- @ftlvariable name="article" type="com.example.models.article.Article" -->
 <#import "_layout.ftl" as layout />
 <@layout.header>
     <div>
@@ -16,10 +16,12 @@
         </form>
     </div>
     <div>
-        <form action="/articles/${article.id}" method="post">
+        <form action="/articles/${article.id}" method="post" onsubmit="return confirmButton();">
             <p>
                 <input type="submit" name="_action" value="delete">
             </p>
         </form>
     </div>
 </@layout.header>
+
+

@@ -19,4 +19,3 @@ fun Application.configureTemplating() {
     }
 }
 
-data class IndexData(val items: List<Int>)

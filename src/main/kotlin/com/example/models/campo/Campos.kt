@@ -1,10 +1,8 @@
-package com.example.models
+package com.example.models.campo
 
-import com.example.models.Articles.autoIncrement
+import com.example.models.article.Articles
 import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.Table
-
-data class Campo(val id: Int, val value: String, val name: String, val description: String, val seasonId: String, val order: Int, val sectionId : Int)
 
 object Campos : Table(){
     val id = integer("id").autoIncrement()

@@ -1,12 +1,12 @@
-package com.example.dao
+package com.example.dao.article
 
 import com.example.dao.DatabaseFactory.dbQuery
-import com.example.models.*
-import kotlinx.coroutines.runBlocking
+import com.example.models.article.Article
+import com.example.models.article.Articles
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
-class DAOArticleImpl : DAOArticle {
+class DAOArticleImpl : DAOArticleInterface {
     private fun resultRowToArticle(row: ResultRow) = Article(
         id = row[Articles.id],
         title = row[Articles.title],
@@ -43,12 +43,4 @@ class DAOArticleImpl : DAOArticle {
         Articles.deleteWhere { Articles.id eq id } > 0
     }
 
-}
-
-val dao: DAOArticle = DAOArticleImpl().apply {
-    runBlocking {
-        if(allArticles().isEmpty()) {
-            addNewArticle("The drive to develop!", "...it's what keeps me going.")
-        }
-    }
 }
